@@ -1,4 +1,4 @@
-The is sample application built with spring-boot to demonstrate Kafka.
+The is sample application built with spring-boot to demonstrate Kafka with Avro for schema-registry.
 Also we have used cassandra as DB. 
 
 A. user-service
