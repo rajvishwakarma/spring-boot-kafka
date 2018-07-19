@@ -1,0 +1,42 @@
+The is sample application built with spring-boot to demonstrate Kafka.
+Also we have used cassandra as DB. 
+
+A. user-service
+B. notificaiton-service
+
+On user-service the user is registered in cassandra database(POST request to save user data) and the user-data is publish on 
+kafka. The published data is then subscribed by the notification-service. Eventually notification-service saves the details 
+in cassandra DB again marking that the welcome mail has been sent to the use as a notification. We have not used the mailing
+service here. 
+
+To Download Kafka
+
+wget http://www-us.apache.org/dist/kafka/1.1.0/kafka_2.11-1.1.0.tgz
+
+Run Zookeeper
+
+sh bin/zookeeper-server-start.sh config/zookeeper.properties
+
+Run Kafka
+
+sh bin/kafka-server-start.sh config/server.properties
+
+Avro Schema Registry
+
+bin/schema-registry-start etc/schema-registry/schema-registry.properties
+
+REST API Call:
+
+URL: http://localhost:8081/users
+TYPE: POST
+Request: {
+            "name" : "New User",
+            "email" : "newuser@example.com"
+          }
+Response: {
+            "id": "4baaf3c0-8b1c-11e8-8600-2597013eeb1c",
+            "name": "New User",
+            "email": "newuser@example.com",
+            "isActive": true,
+            "createdTS": "2018-07-19T06:23:47.758+0000"
+          }      
